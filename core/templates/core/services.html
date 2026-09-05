@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Services — Suncity Django{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 56px;">
+  <div class="container">
+    <div class="section__eyebrow">Our Service</div>
+    <h1 class="section__title">Internet &amp; IP Connectivity Service</h1>
+    <p class="section__lead">
+      We keep our offering deliberately simple: one dependable connectivity service,
+      priced clearly, backed by real people.
+    </p>
+
+    <div style="margin-top: 36px;">
+      <div class="service-card">
+        <div class="service-card__icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01M2 8.82a16 16 0 0 1 20 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h3>Internet &amp; IP Connectivity</h3>
+          <p>
+            A single always-on internet plan with a dedicated IP address, designed for homes,
+            home offices, and small businesses that need a connection they can rely on.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              High-speed, low-latency connection
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Dedicated static IP address
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              24/7 monitoring &amp; support
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              No confusing tiers or add-ons
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Simple, transparent monthly billing
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Fast, local support team
+            </li>
+          </ul>
+          {% if not user.is_authenticated %}
+            <a href="{% url 'accounts:register' %}" class="btn btn-white">Get Started</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "dashboard/_layout.html" %}
+
+{% block title %}Add Client — Suncity Django Admin{% endblock %}
+{% block nav_add %}active{% endblock %}
+
+{% block dash_content %}
+<div class="dash-header">
+  <div>
+    <h1 class="section__title" style="margin-bottom:4px;">Add Client</h1>
+    <p style="color: var(--ink-500); margin:0;">Create a client account on their behalf.</p>
+  </div>
+  <a href="{% url 'dashboard:home' %}" class="btn btn-ghost">&larr; Back to Clients</a>
+</div>
+
+<div class="card" style="padding: 32px; max-width: 560px;">
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="form-errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <div class="form-group">
+      <label class="form-label" for="{{ form.full_name.id_for_label }}">Full Name</label>
+      {{ form.full_name }}
+      {% for error in form.full_name.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="{{ form.email.id_for_label }}">Email Address</label>
+      {{ form.email }}
+      {% for error in form.email.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+      {{ form.phone_number }}
+      {% for error in form.phone_number.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="{{ form.address.id_for_label }}">Address</label>
+      {{ form.address }}
+      {% for error in form.address.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="{{ form.password.id_for_label }}">Temporary Password</label>
+      {{ form.password }}
+      {% for error in form.password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block btn-lg">Add Client</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up — Suncity Django{% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-card__icon">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="auth-card__brand">Suncity Django</div>
+    <div class="auth-card__tagline">Internet and IP Services Enterprise</div>
+
+    <h1>Create your account</h1>
+    <p class="auth-card__subtitle">Sign up to get connected with Suncity Django</p>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="form-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.full_name.id_for_label }}">Full Name</label>
+        {{ form.full_name }}
+        {% for error in form.full_name.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.email.id_for_label }}">Email Address</label>
+        {{ form.email }}
+        {% for error in form.email.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+        {{ form.phone_number }}
+        {% for error in form.phone_number.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.address.id_for_label }}">Address <span style="color: var(--ink-500); font-weight:400;">(optional)</span></label>
+        {{ form.address }}
+        {% for error in form.address.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.password.id_for_label }}">Password</label>
+        {{ form.password }}
+        {% for error in form.password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.confirm_password.id_for_label }}">Confirm Password</label>
+        {{ form.confirm_password }}
+        {% for error in form.confirm_password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="checkbox-row">
+        {{ form.agree_terms }}
+        <label for="{{ form.agree_terms.id_for_label }}">I agree to the Terms of Service and Privacy Policy</label>
+      </div>
+      {% for error in form.agree_terms.errors %}<div class="field-error" style="margin-top:-14px; margin-bottom:14px;">{{ error }}</div>{% endfor %}
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account</button>
+    </form>
+
+    <div class="auth-card__footer">
+      Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

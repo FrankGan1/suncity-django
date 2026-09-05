@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dash-shell">
+  <aside class="dash-sidebar">
+    <div class="dash-sidebar__title">Admin</div>
+    <a href="{% url 'dashboard:home' %}" class="{% block nav_home %}{% endblock %}">Client Management</a>
+    <a href="{% url 'dashboard:add_client' %}" class="{% block nav_add %}{% endblock %}">Add Client</a>
+    <a href="{% url 'core:home' %}">View Site</a>
+  </aside>
+  <div class="dash-main">
+    {% block dash_content %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

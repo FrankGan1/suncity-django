@@ -1,0 +1,74 @@
+{% extends "dashboard/_layout.html" %}
+
+{% block title %}Client Management — Suncity Django Admin{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block dash_content %}
+<div class="dash-header">
+  <div>
+    <h1 class="section__title" style="margin-bottom:4px;">Client Management</h1>
+    <p style="color: var(--ink-500); margin:0;">View, add, and manage every client account.</p>
+  </div>
+  <a href="{% url 'dashboard:add_client' %}" class="btn btn-primary">+ Add Client</a>
+</div>
+
+<div class="dash-stats">
+  <div class="stat-card">
+    <strong>{{ total_clients }}</strong>
+    <span>Total Clients</span>
+  </div>
+  <div class="stat-card">
+    <strong>{{ active_clients }}</strong>
+    <span>Active Clients</span>
+  </div>
+</div>
+
+<form method="get" class="search-box" style="margin-bottom: 18px;">
+  <input type="text" name="q" value="{{ query }}" placeholder="Search by name, email, or phone">
+  <button type="submit" class="btn btn-outline">Search</button>
+  {% if query %}<a href="{% url 'dashboard:home' %}" class="btn btn-ghost">Clear</a>{% endif %}
+</form>
+
+{% if clients %}
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Status</th>
+      <th>Joined</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for client in clients %}
+    <tr>
+      <td>{{ client.full_name }}</td>
+      <td>{{ client.email }}</td>
+      <td>{{ client.phone_number|default:"—" }}</td>
+      <td>
+        {% if client.is_active %}
+          <span class="badge badge-active">Active</span>
+        {% else %}
+          <span class="badge badge-inactive">Inactive</span>
+        {% endif %}
+      </td>
+      <td>{{ client.created_at|date:"M d, Y" }}</td>
+      <td>
+        <div class="table-actions">
+          <a href="{% url 'dashboard:send_reset_password' client.id %}" class="btn btn-outline">Send Reset Password</a>
+          <a href="{% url 'dashboard:delete_client' client.id %}" class="btn btn-danger">Delete</a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="card empty-state">
+  <p>No clients found{% if query %} for "{{ query }}"{% endif %}.</p>
+  <a href="{% url 'dashboard:add_client' %}" class="btn btn-primary">Add your first client</a>
+</div>
+{% endif %}
+{% endblock %}

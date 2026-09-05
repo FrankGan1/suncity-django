@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In — Suncity Django{% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-card__icon">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3z" fill="currentColor"/></svg>
+    </div>
+    <div class="auth-card__brand">Suncity Django</div>
+    <div class="auth-card__tagline">Internet and IP Services Enterprise</div>
+
+    <h1>Welcome back</h1>
+    <p class="auth-card__subtitle">Sign in to access your Suncity Django account</p>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="form-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.username.id_for_label }}">Email Address</label>
+        {{ form.username }}
+        {% for error in form.username.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.password.id_for_label }}">Password</label>
+        {{ form.password }}
+        {% for error in form.password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+
+      <div class="form-row-inline">
+        <label style="display:flex; align-items:center; gap:6px; color: var(--ink-500);">
+          {{ form.remember_me }} Remember me
+        </label>
+        <a href="{% url 'accounts:forgot_password' %}" style="color: var(--brand-700); font-weight:600;">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+    </form>
+
+    <div class="auth-card__footer">
+      Don't have an account? <a href="{% url 'accounts:register' %}">Sign up</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

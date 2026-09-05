@@ -1,0 +1,21 @@
+{% extends "dashboard/_layout.html" %}
+
+{% block title %}Send Reset Password — Suncity Django Admin{% endblock %}
+
+{% block dash_content %}
+<div class="confirm-card">
+  <div class="card">
+    <h2 style="margin-top:0;">Send password reset link?</h2>
+    <p style="color: var(--ink-500);">
+      We'll email a secure password reset link to <strong>{{ client.email }}</strong>.
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="confirm-actions">
+        <button type="submit" class="btn btn-primary">Yes, Send Reset Link</button>
+        <a href="{% url 'dashboard:home' %}" class="btn btn-outline">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

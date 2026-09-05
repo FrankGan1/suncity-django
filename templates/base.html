@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Suncity Django — Internet and IP Services Enterprise{% endblock %}</title>
+  <meta name="description" content="Suncity Django delivers reliable Internet and IP connectivity services.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+{% block header %}
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="{% url 'core:home' %}" class="brand">
+      <span class="brand__mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3z" fill="currentColor"/>
+        </svg>
+      </span>
+      Suncity Django
+    </a>
+
+    <nav class="main-nav">
+      <a href="{% url 'core:home' %}">Home</a>
+      <a href="{% url 'core:services' %}">Services</a>
+      <a href="{% url 'core:contact' %}">Contact Us</a>
+    </nav>
+
+    <div class="header-actions">
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}
+          <a href="{% url 'dashboard:home' %}" class="btn btn-outline">Dashboard</a>
+        {% else %}
+          <a href="{% url 'accounts:my_account' %}" class="btn btn-outline">My Account</a>
+        {% endif %}
+        <a href="{% url 'accounts:logout' %}" class="btn btn-ghost">Sign Out</a>
+      {% else %}
+        <a href="{% url 'accounts:register' %}" class="btn btn-outline">Sign Up</a>
+        <a href="{% url 'accounts:login' %}" class="btn btn-primary">Sign In</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% if messages %}
+<div class="alerts">
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+{% block footer %}
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="brand__mark">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3z" fill="currentColor"/>
+            </svg>
+          </span>
+          Suncity Django
+        </div>
+        <p>Reliable Internet and IP connectivity services, built for homes and businesses that can't afford downtime.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="{% url 'core:home' %}">Home</a></li>
+          <li><a href="{% url 'core:services' %}">Services</a></li>
+          <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="{% url 'accounts:register' %}">Sign Up</a></li>
+          <li><a href="{% url 'accounts:login' %}">Sign In</a></li>
+          <li><a href="{% url 'accounts:forgot_password' %}">Forgot Password</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; {% now "Y" %} Suncity Django. All rights reserved.
+    </div>
+  </div>
+</footer>
+{% endblock %}
+
+</body>
+</html>

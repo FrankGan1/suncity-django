@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}My Account — Suncity Django{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 56px;">
+  <div class="container" style="max-width: 720px;">
+    <div class="section__eyebrow">My Account</div>
+    <h1 class="section__title">Welcome back, {{ client.full_name|default:user.email }}</h1>
+
+    <div class="card" style="padding: 28px 32px; margin-top: 24px;">
+      <h3 style="margin-top:0;">Account Details</h3>
+      <p><strong>Name:</strong> {{ client.full_name|default:"—" }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Phone:</strong> {{ client.phone_number|default:"—" }}</p>
+      <p><strong>Address:</strong> {{ client.address|default:"—" }}</p>
+    </div>
+
+    <div class="card" style="padding: 28px 32px; margin-top: 20px;">
+      <h3 style="margin-top:0;">Your Service</h3>
+      <p style="margin-bottom: 4px;"><span class="badge badge-active">Active</span></p>
+      <p style="color: var(--ink-500);">Internet &amp; IP Connectivity — one plan, fully managed by our support team.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
